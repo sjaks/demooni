@@ -9,19 +9,19 @@
                 background: #111;
                 color: #eee;
             }
-            #packet-route {
+            #pakeetti-poloku {
                 width: 100%;
                 height: 100%;
                 position: relative;
             }
-            #daemon {
+            #demooni {
                 position: absolute;
                 font-size: 35px;
                 top: 100;
                 left: 100;
                 z-index: 1;
             }
-            #packet {
+            #pakeetti {
                 position: relative;
                 font-size: 25px;
                 top: 100;
@@ -29,7 +29,7 @@
                 transition: top 1s, left 1s;
                 z-index: 0;
             }
-            #speed {
+            #nopeeus {
                 width: 90%;
                 height: 40px;
                 position: absolute;
@@ -45,7 +45,7 @@
                 padding-left: 15px;
                 font-size: 16px;
             }
-            #switcher {
+            #nappula {
                 position: absolute;
                 left: 30px;
                 bottom: 30px;
@@ -56,93 +56,93 @@
         </style>
     </head>
     <body>
-        <input type="number" id="speed" value="1000" min="10">
-        <div id="switcher" onclick="changeIcons()">&#x1F504;</div>
-        <div id="packet-route">
-            <span id="daemon" class="daemon">&#x1F608;</span>
-            <span id="packet">&#x1F4E6;</span>
+
+        <input type="number" id="nopeeus" value="1000" min="10">
+        <div id="nappula" onclick="vaihaIkoonit()">&#x1F504;</div>
+        <div id="pakeetti-poloku">
+            <span id="demooni" class="demooni">&#x1F608;</span>
+            <span id="pakeetti">&#x1F4E6;</span>
         </div>
         <script>
-            var net = document.getElementById("packet-route");
-            var packet = document.getElementById("packet");
-            var route = [];
-            var loop;
-            var themeCheck = true;
+            var net = document.getElementById("pakeetti-poloku");
+            var pakeetti = document.getElementById("pakeetti");
+            var poloku = [];
+            var luuppi;
+            var teemaValitsin = true;
 
-
-            function startLoop(i) {
-                loop = setInterval(function() {
-                    spawnNewDaemon();
-                    movePacket();
+            function alootaLuuppi(i) {
+                luuppi = setInterval(function() {
+                    luoUusiDemooni();
+                    liikutaPakeettia();
                     twemoji.parse(document.body);
-                    setSpeed();
+                    aseetaNopeeus();
                 }, i);
             }
 
 
-            function setSpeed() {
-                var newInterval = parseInt(document.getElementById("speed").value);
+            function aseetaNopeeus() {
+                var newInterval = parseInt(document.getElementById("nopeeus").value);
                 if (newInterval == NaN) {
                     console.log(0)
                 }
-              
-                packet.style.transition = "top " + newInterval/1000 + "s, left " + newInterval/1000 + "s";
-                clearInterval(loop);
-                startLoop(newInterval);
+
+                pakeetti.style.transition = "top " + newInterval/1000 + "s, left " + newInterval/1000 + "s";
+                clearInterval(luuppi);
+                alootaLuuppi(newInterval);
             }
 
 
             function getRandomCoords() {
                 var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 180));
                 var x = 40 + Math.floor(Math.random() * Math.floor(window.innerWidth - 120));
-                route.push([x, y]);
+                poloku.push([x, y]);
                 return [x, y];
             }
 
 
-            function spawnNewDaemon() {
-                var newDaemon = document.getElementById("daemon").cloneNode(true);
+            function luoUusiDemooni() {
+                var uusiDemooni = document.getElementById("demooni").cloneNode(true);
                 var newPos = getRandomCoords();
 
-                newDaemon.style.left = newPos[0];
-                newDaemon.style.top = newPos[1];
+                uusiDemooni.style.left = newPos[0];
+                uusiDemooni.style.top = newPos[1];
 
-                net.appendChild(newDaemon);
+                net.appendChild(uusiDemooni);
             }
 
 
-            function movePacket() {
-                packet.style.left = route[route.length - 1][0];
-                packet.style.top = route[route.length - 1][1];
+            function liikutaPakeettia() {
+                pakeetti.style.left = poloku[poloku.length - 1][0];
+                pakeetti.style.top = poloku[poloku.length - 1][1];
             }
 
 
-            function changeIcons() {
-                var daemons = document.getElementsByClassName("daemon");
-                var packet = document.getElementById("packet");
-                var daemonIcon;
+            function vaihaIkoonit() {
+                var demoonit = document.getElementsByClassName("demooni");
+                var pakeetti = document.getElementById("pakeetti");
+                var demooniIkooni;
 
-                if (themeCheck) {
-                    packet.innerHTML = "&#x26be;";
-                    daemonIcon = "&#x1f415;";
-                    themeCheck = false;
+                if (teemaValitsin) {
+                    pakeetti.innerHTML = "&#x26be;";
+                    demooniIkooni = "&#x1f415;";
+                    teemaValitsin = false;
                 } else {
-                    packet.innerHTML = "&#x1F4E6;";
-                    daemonIcon = "&#x1F608;";
-                    themeCheck = true;
+                    pakeetti.innerHTML = "&#x1F4E6;";
+                    demooniIkooni = "&#x1F608;";
+                    teemaValitsin = true;
                 }
 
-                for (var i = 0; i < daemons.length; i++) {
-                    daemons[i].innerHTML = daemonIcon;
+                for (var i = 0; i < demoonit.length; i++) {
+                    demoonit[i].innerHTML = demooniIkooni;
                 }
 
                 twemoji.parse(document.body);
             }
 
 
-            // Start
+            // Aloota
             twemoji.parse(document.body);
-            startLoop(1000);           
+            alootaLuuppi(1000);
         </script>
     </body>
 </html>
