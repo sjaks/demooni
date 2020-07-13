@@ -17,36 +17,49 @@
             #daemon {
                 position: absolute;
                 font-size: 35px;
-                top: 30;
-                left: 30;
+                top: 100;
+                left: 100;
                 z-index: 1;
             }
             #packet {
                 position: relative;
                 font-size: 25px;
-                top: 30;
-                left: 30;
+                top: 100;
+                left: 100;
                 transition: top 1s, left 1s;
                 z-index: 0;
             }
             #speed {
-                width: 100%;
+                width: 90%;
                 height: 40px;
                 position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 15px;
+                margin: 0px auto;
                 z-index: 3;
-                background: #555;
+                background: #51317a;
                 border: none;
                 color: #eee;
                 font-family: Helvetica;
                 padding-left: 15px;
                 font-size: 16px;
             }
+            #switcher {
+                position: absolute;
+                left: 30px;
+                bottom: 30px;
+                height: 80px;
+                width: 80px;
+                z-index: 3;
+            }
         </style>
     </head>
     <body>
         <input type="number" id="speed" value="1000" min="10">
+        <div id="switcher" onclick="changeIcons()">&#x1F504;</div>
         <div id="packet-route">
-            <span onclick="killDaemon(this)" id="daemon">&#x1F608;</span>
+            <span onclick="killDaemon(this)" id="daemon" class="daemon">&#x1F608;</span>
             <span id="packet">&#x1F4E6;</span>
         </div>
         <script>
@@ -54,6 +67,7 @@
             var packet = document.getElementById("packet");
             var route = [];
             var loop;
+            var themeCheck = true;
 
 
             function startLoop(i) {
@@ -79,7 +93,7 @@
 
 
             function getRandomCoords() {
-                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 120));
+                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 180));
                 var x = 40 + Math.floor(Math.random() * Math.floor(window.innerWidth - 120));
                 route.push([x, y]);
                 return [x, y];
@@ -107,6 +121,31 @@
             }
 
 
+            function changeIcons() {
+                var daemons = document.getElementsByClassName("daemon");
+                var packet = document.getElementById("packet");
+                var daemonIcon;
+
+                if (themeCheck) {
+                    packet.innerHTML = "&#x26be;";
+                    daemonIcon = "&#x1f415;";
+                    themeCheck = false;
+                } else {
+                    packet.innerHTML = "&#x1F4E6;";
+                    daemonIcon = "&#x1F608;";
+                    themeCheck = true;
+                }
+
+                for (var i = 0; i < daemons.length; i++) {
+                    daemons[i].innerHTML = daemonIcon;
+                }
+
+                twemoji.parse(document.body);
+            }
+
+
+            // Start
+            twemoji.parse(document.body);
             startLoop(1000);           
         </script>
     </body>
