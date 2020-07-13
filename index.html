@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Reititysdemoonit</title>
+        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <style>
+            html, body {
+                margin: 0px;
+                padding: 0px;
+                background: #111;
+                color: #eee;
+            }
+            #packet-route {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            #daemon {
+                position: absolute;
+                font-size: 35px;
+                top: 30;
+                left: 30;
+                z-index: 1;
+            }
+            #packet {
+                position: relative;
+                font-size: 25px;
+                top: 30;
+                left: 30;
+                transition: top 1s, left 1s;
+                z-index: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="packet-route">
+            <span id="daemon">&#x1F608;</span>
+            <span id="packet">&#x1F4E6;</span>
+        </div>
+        <script>
+            var net = document.getElementById("packet-route");
+            var packet = document.getElementById("packet");
+            var route = [];
+
+            function getRandomCoords() {
+                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 120));
+                var x = 40 + Math.floor(Math.random() * Math.floor(window.innerWidth - 120));
+                route.push([x, y]);
+                return [x, y];
+            }
+
+
+            function spawnNewDaemon() {
+                var newDaemon = document.getElementById("daemon").cloneNode(true);
+                var newPos = getRandomCoords();
+
+                newDaemon.style.left = newPos[0];
+                newDaemon.style.top = newPos[1];
+
+                net.appendChild(newDaemon);
+            }
+
+
+            function movePacket() {
+                packet.style.left = route[route.length - 1][0];
+                packet.style.top = route[route.length - 1][1];
+            }
+
+
+            setInterval(function() {
+                spawnNewDaemon();
+                movePacket();
+            }, 1000);
+           
+        </script>
+    </body>
+</html>
