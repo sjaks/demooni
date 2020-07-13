@@ -30,11 +30,15 @@
                 z-index: 0;
             }
             #speed {
-                width: 100%;
+                width: 90%;
                 height: 40px;
                 position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 15px;
+                margin: 0px auto;
                 z-index: 3;
-                background: #555;
+                background: #51317a;
                 border: none;
                 color: #eee;
                 font-family: Helvetica;
@@ -89,7 +93,7 @@
 
 
             function getRandomCoords() {
-                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 120));
+                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 180));
                 var x = 40 + Math.floor(Math.random() * Math.floor(window.innerWidth - 120));
                 route.push([x, y]);
                 return [x, y];
@@ -136,6 +140,8 @@
             }
 
 
+            // Start
+            twemoji.parse(document.body);
             startLoop(1000);           
         </script>
     </body>
