@@ -17,15 +17,15 @@
             #daemon {
                 position: absolute;
                 font-size: 35px;
-                top: 30;
-                left: 30;
+                top: 100;
+                left: 100;
                 z-index: 1;
             }
             #packet {
                 position: relative;
                 font-size: 25px;
-                top: 30;
-                left: 30;
+                top: 100;
+                left: 100;
                 transition: top 1s, left 1s;
                 z-index: 0;
             }
@@ -41,12 +41,21 @@
                 padding-left: 15px;
                 font-size: 16px;
             }
+            #switcher {
+                position: absolute;
+                left: 30px;
+                bottom: 30px;
+                height: 80px;
+                width: 80px;
+                z-index: 3;
+            }
         </style>
     </head>
     <body>
         <input type="number" id="speed" value="1000" min="10">
+        <div id="switcher" onclick="changeIcons()">&#x1F504;</div>
         <div id="packet-route">
-            <span id="daemon">&#x1F608;</span>
+            <span id="daemon" class="daemon">&#x1F608;</span>
             <span id="packet">&#x1F4E6;</span>
         </div>
         <script>
@@ -54,6 +63,7 @@
             var packet = document.getElementById("packet");
             var route = [];
             var loop;
+            var themeCheck = true;
 
 
             function startLoop(i) {
@@ -100,6 +110,29 @@
             function movePacket() {
                 packet.style.left = route[route.length - 1][0];
                 packet.style.top = route[route.length - 1][1];
+            }
+
+
+            function changeIcons() {
+                var daemons = document.getElementsByClassName("daemon");
+                var packet = document.getElementById("packet");
+                var daemonIcon;
+
+                if (themeCheck) {
+                    packet.innerHTML = "&#x26be;";
+                    daemonIcon = "&#x1f415;";
+                    themeCheck = false;
+                } else {
+                    packet.innerHTML = "&#x1F4E6;";
+                    daemonIcon = "&#x1F608;";
+                    themeCheck = true;
+                }
+
+                for (var i = 0; i < daemons.length; i++) {
+                    daemons[i].innerHTML = daemonIcon;
+                }
+
+                twemoji.parse(document.body);
             }
 
 
