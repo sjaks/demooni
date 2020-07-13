@@ -46,7 +46,7 @@
     <body>
         <input type="number" id="speed" value="1000" min="10">
         <div id="packet-route">
-            <span id="daemon">&#x1F608;</span>
+            <span onclick="killDaemon(this)" id="daemon">&#x1F608;</span>
             <span id="packet">&#x1F4E6;</span>
         </div>
         <script>
@@ -94,6 +94,10 @@
                 newDaemon.style.top = newPos[1];
 
                 net.appendChild(newDaemon);
+            }
+
+            function killDaemon(daemon) {
+              daemon.remove();
             }
 
 
