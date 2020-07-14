@@ -17,46 +17,48 @@
             #demooni {
                 position: absolute;
                 font-size: 35px;
-                top: 100;
-                left: 100;
+                top: -100;
+                left: -100;
                 z-index: 1;
             }
             #pakeetti {
                 position: relative;
                 font-size: 25px;
-                top: 100;
-                left: 100;
+                top: -100;
+                left: -100;
                 transition: top 1s, left 1s;
                 z-index: 0;
             }
             #nopeeus {
-                width: 90%;
-                height: 40px;
+                width: 400px;
+                height: 60px;
                 position: absolute;
-                left: 0px;
-                right: 0px;
+                left: 15px;
                 top: 15px;
-                margin: 0px auto;
                 z-index: 3;
                 background: #51317a;
                 border: none;
+                border-radius: 10px;
                 color: #eee;
                 font-family: Helvetica;
                 padding-left: 15px;
-                font-size: 16px;
+                font-size: 22px;
             }
             #nappula {
                 position: absolute;
-                left: 30px;
-                bottom: 30px;
-                height: 80px;
-                width: 80px;
+                left: 430px;
+                top: 15px;
+                height: 60px;
+                width: 60px;
                 z-index: 3;
+            }
+            #nappula img {
+                height: 60px;
+                width: 60px;
             }
         </style>
     </head>
     <body>
-
         <input type="number" id="nopeeus" value="1000" min="10">
         <div id="nappula" onclick="vaihaIkoonit()">&#x1F504;</div>
         <div id="pakeetti-poloku">
@@ -66,9 +68,23 @@
         <script>
             var net = document.getElementById("pakeetti-poloku");
             var pakeetti = document.getElementById("pakeetti");
+            var demooniMalli = document.getElementById("demooni");
             var poloku = [];
             var luuppi;
+            var pystyMarginaali = 200;
+            var vaakaMarginaali = 100;
             var teemaValitsin = true;
+
+
+            function aluustaKaikki() {
+                demooniMalli.style.top = window.innerHeight / 2;
+                demooniMalli.style.left = window.innerWidth / 2;
+                pakeetti.style.top = window.innerHeight / 2;
+                pakeetti.style.left = window.innerWidth / 2;
+                twemoji.parse(document.body);
+                alootaLuuppi(1000);
+            }
+
 
             function alootaLuuppi(i) {
                 luuppi = setInterval(function() {
@@ -92,17 +108,17 @@
             }
 
 
-            function getRandomCoords() {
-                var y = 40 + Math.floor(Math.random() * Math.floor(window.innerHeight - 180));
-                var x = 40 + Math.floor(Math.random() * Math.floor(window.innerWidth - 120));
+            function haeSatuunnaisetKoordinaatit() {
+                var y = pystyMarginaali / 2 + Math.floor(Math.random() * Math.floor(window.innerHeight - pystyMarginaali));
+                var x = vaakaMarginaali / 2 + Math.floor(Math.random() * Math.floor(window.innerWidth - vaakaMarginaali));
                 poloku.push([x, y]);
                 return [x, y];
             }
 
 
             function luoUusiDemooni() {
-                var uusiDemooni = document.getElementById("demooni").cloneNode(true);
-                var newPos = getRandomCoords();
+                var uusiDemooni = demooniMalli.cloneNode(true);
+                var newPos = haeSatuunnaisetKoordinaatit();
 
                 uusiDemooni.style.left = newPos[0];
                 uusiDemooni.style.top = newPos[1];
@@ -146,8 +162,7 @@
 
 
             // Aloota
-            twemoji.parse(document.body);
-            alootaLuuppi(1000);
+            aluustaKaikki();
         </script>
     </body>
 </html>
