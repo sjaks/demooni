@@ -168,7 +168,22 @@
                 if (teemat[teema].kuolevainen) {
                     demooni.innerHTML = "&#x1F4A5;";
                     twemoji.parse(document.body);
-                    setTimeout(function(){demooni.remove()}, 1000);
+                    setTimeout(function(){poistaDemooninPoloku(demooni); demooni.remove()}, 1000);
+                }
+            }
+
+
+            function poistaDemooninPoloku(demooni) {
+                poloku.splice(demooninIndeksi(demooni),1);
+            }
+
+
+            function demooninIndeksi(demooni) {
+                var demoonit = document.getElementsByClassName("demooni");
+                for (var i = 1; i < demoonit.length - 1; i++) {
+                  if (demoonit[i] === demooni) {
+                    return i - 1;
+                  }
                 }
             }
 
