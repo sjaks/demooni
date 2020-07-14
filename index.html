@@ -84,6 +84,14 @@
                 -webkit-transform: scaleX(-1);
                 transform: scaleX(-1);
             }
+            .apinaaJumala {
+                position: absolute; /* Apiina Jumala on absoluuttinen */
+                height: 100%;
+                left: 50%;
+                top: 50%;
+                margin-top: -206px;
+               margin-left: -206px;
+            }
         </style>
     </head>
     <body>
@@ -145,6 +153,8 @@
                     aseetaNopeeus();
                     ravistaDemooneita();
                     lataaKuvaat();
+                    if (teemat[teema].nimi === "demooni") uhmaaApiinaJumalaa();
+                    twemoji.parse(document.body);
                 }, i);
             }
 
@@ -277,6 +287,25 @@
                 }
             }
 
+
+            function uhmaaApiinaJumalaa() {
+                let demoonit = document.getElementsByClassName("demooni");
+                let uhmaausLuku = Math.floor(Math.random() * 666);
+                if (demoonit.length > uhmaausLuku) {
+                    let apiinaJumala = document.createElement("span");
+
+                    apiinaJumala.className = "apinaaJumala";
+                    apiinaJumala.innerHTML = '<img class="apiinaJumala" src="assets/ApiinaJumala.png">';
+
+                    net.appendChild(apiinaJumala);
+
+                    tapaKaikki();
+
+                    setTimeout(function() {
+                        apiinaJumala.remove();
+                    }, 6666);
+                }
+            }
 
             // Aloota
             aluustaKaikki();
