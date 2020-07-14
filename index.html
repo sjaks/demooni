@@ -166,7 +166,9 @@
 
             function tapaDemooni(demooni) {
                 if (teemat[teema].kuolevainen) {
-                    demooni.remove();
+                    demooni.innerHTML = "&#x1F4A5;";
+                    twemoji.parse(document.body);
+                    setTimeout(function(){demooni.remove()}, 1000);
                 }
             }
 
