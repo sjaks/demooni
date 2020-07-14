@@ -1,0 +1,102 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    background: #111;
+    color: #eee;
+}
+
+#pakeetti-poloku {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: url('http://twemoji.maxcdn.com/36x36/261d.png'), auto;
+}
+
+#pakeetti {
+    position: relative;
+    font-size: 25px;
+    top: -100;
+    left: -100;
+    transition: top 1s, left 1s;
+    z-index: 4;
+}
+
+#nopeeus {
+    width: 400px;
+    height: 60px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    z-index: 3;
+    background: #51317a;
+    border: none;
+    border-radius: 10px;
+    color: #eee;
+    font-family: Helvetica;
+    padding-left: 15px;
+    font-size: 22px;
+    cursor: url('http://twemoji.maxcdn.com/36x36/261d.png'), auto;
+}
+
+#reseettiNappula {
+    position: absolute;
+    left: 430px;
+    top: 15px;
+    height: 60px;
+    width: 60px;
+    z-index: 3;
+    cursor: url('http://twemoji.maxcdn.com/36x36/261d.png'), auto;
+}
+
+#teemaNappula {
+    position: absolute;
+    left: 505px;
+    top: 15px;
+    height: 60px;
+    width: 60px;
+    z-index: 3;
+    cursor: url('http://twemoji.maxcdn.com/36x36/261d.png'), auto;
+}
+
+#reseettiNappula img {
+    height: 60px;
+    width: 60px;
+}
+
+#teemaNappula img {
+    height: 60px;
+    width: 60px;
+}
+
+.demooni {
+    position: absolute;
+    font-size: 35px;
+    z-index: 1;
+    transition: left 3s, top 3s;
+}
+
+.raaja img {
+    height: 40px;
+    filter: hue-rotate(203deg);
+}
+
+.vasenRaaja img {
+    transform: rotate(-40deg);
+    transition: transform 0.5s;
+}
+
+.oikeaRaaja img {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.apinaaJumala {
+    position: absolute; /* Apiina Jumala on absoluuttinen */
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
+    transition: left 0.3s, top 0.3s;
+}
