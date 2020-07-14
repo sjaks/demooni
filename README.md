@@ -1,5 +1,5 @@
 # demooni 😈
-Routing daemons - a detailed and accurate visual representation of how packets flow on the web
+Routing daemons - a detailed and accurate visual representation of how packets flow on the web. This is **not** a game.
 
 ## The Theory of Daemons
 Something called routing daemons (demooni) throw packets (pakeetti) from one point to another. This way your favorite web site is delivered onto your computer.
