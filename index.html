@@ -133,7 +133,7 @@
             function aluustaKaikki() {
                 pakeetti.style.top = window.innerHeight / 2;
                 pakeetti.style.left = window.innerWidth / 2;
-                twemoji.parse(document.body);
+                lataaKuvaat();
                 alootaLuuppi(1000);
             }
 
@@ -144,7 +144,7 @@
                     liikutaPakeettia();
                     aseetaNopeeus();
                     ravistaDemooneita();
-                    twemoji.parse(document.body);
+                    lataaKuvaat();
                 }, i);
             }
 
@@ -169,6 +169,11 @@
             }
 
 
+            function lataaKuvaat() {
+                twemoji.parse(document.body);
+            }
+
+
             function luoUusiDemooni(i) {
                 var uusiDemooni = document.createElement("span");
                 var uusiSijaainti = haeSatuunnaisetKoordinaatit();
@@ -190,7 +195,7 @@
             function tapaDemooni(demooni) {
                 if (teemat[teema].kuolevainen) {
                     demooni.innerHTML = "&#x1F4A5;";
-                    twemoji.parse(document.body);
+                    lataaKuvaat();
                     setTimeout(function(){poistaDemooninPoloku(demooni); demooni.remove()}, 1000);
                 }
             }
@@ -262,7 +267,7 @@
                     demoonit[i].innerHTML = teemat[teema].ikooni;
                 }
 
-                twemoji.parse(document.body);
+                lataaKuvaat();
             }
 
 
