@@ -78,7 +78,7 @@
             }
             .vasenRaaja img {
                 transform: rotate(-40deg);
-                transition: transform 1s;
+                transition: transform 0.5s;
             }
             .oikeaRaaja img {
                 -webkit-transform: scaleX(-1);
@@ -108,21 +108,24 @@
                     ikooni: '<span class="raaja vasenRaaja">&#x270b;</span>&#x1F608;<span class="raaja oikeaRaaja">&#x270b;</span>',
                     pakeetti: "&#x1F4E6;",
                     jahtaa: false,
-                    kuolevainen: true
+                    kuolevainen: true,
+                    etuRaajatOmaava: true
                 },
                 {
                     nimi: "hauveli",
                     ikooni: "&#x1f415;",
                     pakeetti: "&#x26be;",
                     jahtaa: true,
-                    kuolevainen: false
+                    kuolevainen: false,
+                    etuRaajatOmaava: false
                 },
                 {
                     nimi: "apiina",
                     ikooni: "&#x1f648;",
                     pakeetti: "&#x1f34c;",
                     jahtaa: false,
-                    kuolevainen: false
+                    kuolevainen: false,
+                    etuRaajatOmaava: false
                 }
             ];
 
@@ -137,7 +140,7 @@
 
             function alootaLuuppi(i) {
                 luuppi = setInterval(function() {
-                    luoUusiDemooni();
+                    luoUusiDemooni(i);
                     liikutaPakeettia();
                     aseetaNopeeus();
                     ravistaDemooneita();
@@ -166,7 +169,7 @@
             }
 
 
-            function luoUusiDemooni() {
+            function luoUusiDemooni(i) {
                 var uusiDemooni = document.createElement("span");
                 var uusiSijaainti = haeSatuunnaisetKoordinaatit();
 
@@ -177,6 +180,10 @@
                 uusiDemooni.setAttribute('onclick', "tapaDemooni(this)");
 
                 net.appendChild(uusiDemooni);
+
+                setTimeout(function() {
+                    heilutaVaseentaEtuuRaajaa(uusiDemooni);
+                }, i);
             }
 
 
@@ -256,6 +263,13 @@
                 }
 
                 twemoji.parse(document.body);
+            }
+
+
+            function heilutaVaseentaEtuuRaajaa(kohdeDemooni) {
+                if (teemat[teema].etuRaajatOmaava) {
+                    kohdeDemooni.childNodes[0].childNodes[0].style.transform = "rotate(-60deg)";
+                }
             }
 
 
