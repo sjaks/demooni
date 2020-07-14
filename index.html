@@ -75,19 +75,21 @@
             var vaakaMarginaali = 100;
             
 
-            var teema = 1;
+            var teema = 0;
             var teemat = [
                 {
                     nimi: "demooni",
                     ikooni: "&#x1F608;",
                     pakeetti: "&#x1F4E6;",
-                    jahtaa: false
+                    jahtaa: false,
+                    kuolevainen: true
                 },
                 {
                     nimi: "hauveli",
                     ikooni: "&#x1f415;",
                     pakeetti: "&#x26be;",
-                    jahtaa: false
+                    jahtaa: false,
+                    kuolevainen: false
                 }
             ]
 
@@ -106,8 +108,8 @@
                 luuppi = setInterval(function() {
                     luoUusiDemooni();
                     liikutaPakeettia();
-                    twemoji.parse(document.body);
                     aseetaNopeeus();
+                    twemoji.parse(document.body);
                 }, i);
             }
 
@@ -144,7 +146,9 @@
 
 
             function tapaDemooni(demooni) {
-                demooni.remove();
+                if (teemat[teema].kuolevainen) {
+                    demooni.remove();
+                }
             }
 
 
@@ -157,17 +161,17 @@
             function vaihaIkoonit() {
                 var demoonit = document.getElementsByClassName("demooni");
 
-                pakeetti.innerHTML = teemat[teema].pakeetti;
-                for (var i = 0; i < demoonit.length; i++) {
-                    demoonit[i].innerHTML = teemat[teema].ikooni;
-                }
-
                 if (teema == teemat.length - 1) {
                     teema = 0;
                 } else {
                     teema++;
                 }
-             
+
+                pakeetti.innerHTML = teemat[teema].pakeetti;
+                for (var i = 0; i < demoonit.length; i++) {
+                    demoonit[i].innerHTML = teemat[teema].ikooni;
+                }
+
                 twemoji.parse(document.body);
             }
 
