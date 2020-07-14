@@ -60,7 +60,7 @@
         <input type="number" id="nopeeus" value="1000" min="10">
         <div id="nappula" onclick="vaihaIkoonit()">&#x1F504;</div>
         <div id="pakeetti-poloku">
-            <span id="demooni" class="demooni">&#x1F608;</span>
+            <span id="demooni" onclick="tapaDemooni(this)" class="demooni">&#x1F608;</span>
             <span id="pakeetti">&#x1F4E6;</span>
         </div>
         <script>
@@ -108,6 +108,11 @@
                 uusiDemooni.style.top = newPos[1];
 
                 net.appendChild(uusiDemooni);
+            }
+
+
+            function tapaDemooni(demooni) {
+                demooni.remove();
             }
 
 
