@@ -20,6 +20,7 @@
                 top: -100;
                 left: -100;
                 z-index: 1;
+                transition: left 3s, top 3s;
             }
             #pakeetti {
                 position: relative;
@@ -62,7 +63,7 @@
         <input type="number" id="nopeeus" value="1000" min="10">
         <div id="nappula" onclick="vaihaIkoonit()">&#x1F504;</div>
         <div id="pakeetti-poloku">
-            <span id="demooni" onclick="tapaDemooni(this)" class="demooni">&#x1F608;</span>
+            <span id="demooni" class="demooni">&#x1F608;</span>
             <span id="pakeetti">&#x1F4E6;</span>
         </div>
         <script>
@@ -73,11 +74,10 @@
             var luuppi;
             var pystyMarginaali = 200;
             var vaakaMarginaali = 100;
-            
+
 
             var teema = 0;
-            var teemat = [
-                {
+            var teemat = [{
                     nimi: "demooni",
                     ikooni: "&#x1F608;",
                     pakeetti: "&#x1F4E6;",
@@ -88,13 +88,13 @@
                     nimi: "hauveli",
                     ikooni: "&#x1f415;",
                     pakeetti: "&#x26be;",
-                    jahtaa: false,
+                    jahtaa: true,
                     kuolevainen: false
                 }
-            ]
+            ];
 
 
-            function aluustaKaikki() {
+            function aluustaKaikki() {
                 demooniMalli.style.top = window.innerHeight / 2;
                 demooniMalli.style.left = window.innerWidth / 2;
                 pakeetti.style.top = window.innerHeight / 2;
@@ -120,7 +120,7 @@
                     console.log(0)
                 }
 
-                pakeetti.style.transition = "top " + newInterval/1000 + "s, left " + newInterval/1000 + "s";
+                pakeetti.style.transition = "top " + newInterval / 1000 + "s, left " + newInterval / 1000 + "s";
                 clearInterval(luuppi);
                 alootaLuuppi(newInterval);
             }
@@ -140,6 +140,7 @@
 
                 uusiDemooni.style.left = newPos[0];
                 uusiDemooni.style.top = newPos[1];
+                uusiDemooni.setAttribute('onclick', "tapaDemooni(this)");
 
                 net.appendChild(uusiDemooni);
             }
@@ -155,6 +156,14 @@
             function liikutaPakeettia() {
                 pakeetti.style.left = poloku[poloku.length - 1][0];
                 pakeetti.style.top = poloku[poloku.length - 1][1];
+
+                if (teemat[teema].jahtaa) {
+                    var demoonit = document.getElementsByClassName("demooni");
+                    for (var i = 0; i < demoonit.length; i++) {
+                        demoonit[i].style.left = poloku[poloku.length - 1][0];
+                        demoonit[i].style.top = poloku[poloku.length - 1][1];
+                    }
+                }
             }
 
 
