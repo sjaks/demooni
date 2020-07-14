@@ -13,6 +13,7 @@
                 width: 100%;
                 height: 100%;
                 position: relative;
+                overflow: hidden;
             }
             #demooni {
                 position: absolute;
@@ -57,13 +58,29 @@
                 height: 60px;
                 width: 60px;
             }
+            .raaja img {
+                height: 40px;
+                filter: hue-rotate(203deg);
+            }
+            .vasenRaaja img {
+                transform: rotate(-40deg);
+                transition: transform 1s;
+            }
+            .oikeaRaaja img {
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+            }
         </style>
     </head>
     <body>
         <input type="number" id="nopeeus" value="1000" min="10">
         <div id="nappula" onclick="vaihaIkoonit()">&#x1F504;</div>
         <div id="pakeetti-poloku">
-            <span id="demooni" class="demooni">&#x1F608;</span>
+            <span id="demooni" class="demooni">
+                <span class="raaja vasenRaaja">&#x270b;</span>
+                &#x1F608;
+                <span class="raaja oikeaRaaja">&#x270b;</span>
+            </span>
             <span id="pakeetti">&#x1F4E6;</span>
         </div>
         <script>
@@ -79,7 +96,7 @@
             var teema = 0;
             var teemat = [{
                     nimi: "demooni",
-                    ikooni: "&#x1F608;",
+                    ikooni: '<span class="raaja vasenRaaja">&#x270b;</span>&#x1F608;<span class="raaja oikeaRaaja">&#x270b;</span>',
                     pakeetti: "&#x1F4E6;",
                     jahtaa: false,
                     kuolevainen: true
@@ -109,6 +126,7 @@
                     luoUusiDemooni();
                     liikutaPakeettia();
                     aseetaNopeeus();
+                    ravistaDemooneita();
                     twemoji.parse(document.body);
                 }, i);
             }
@@ -149,6 +167,20 @@
             function tapaDemooni(demooni) {
                 if (teemat[teema].kuolevainen) {
                     demooni.remove();
+                }
+            }
+
+
+            function ravistaDemooneita() {
+                if (!teemat[teema].jahtaa) {
+                    var demoonit = document.getElementsByClassName("demooni");
+                    for (var i = 1; i < demoonit.length - 1; i++) {
+                        var y = Math.floor(Math.random() * Math.floor(40));
+                        var x = Math.floor(Math.random() * Math.floor(40));
+
+                        demoonit[i].style.left = poloku[i - 1][0] + x;
+                        demoonit[i].style.top =  poloku[i - 1][1] + y;
+                    }
                 }
             }
 
