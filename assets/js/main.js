@@ -44,6 +44,7 @@ function aluustaKaikki() {
 
 function alootaLuuppi(i) {
     luuppi = setInterval(function() {
+        siivooKuolleet();
         luoUusiDemooni(i);
         lataaKuvaat();
         liikutaPakeettia();
@@ -53,6 +54,21 @@ function alootaLuuppi(i) {
         lataaKuvaat();
         twemoji.parse(document.body);
     }, i);
+}
+
+
+function siivooKuolleet() {
+     var demoonit = document.getElementsByClassName("demooni");
+     var i = 0;
+     Array.from(demoonit).forEach(demooni => {
+        // Don't kill the ones that are already dead
+        if (demooni.classList.contains("kuaallu")){
+            poloku.splice(i,1);
+            demooni.remove();
+        } else {
+            i++;
+        }
+    });
 }
 
 
@@ -102,11 +118,8 @@ function luoUusiDemooni(i) {
 function tapaDemooni(demooni, pakota = false) {
     if (teemat[teema].kuolevainen || pakota) {
         demooni.innerHTML = "&#x1F4A5;";
+        demooni.classList.add("kuaallu");
         lataaKuvaat();
-        setTimeout(function(){
-            poistaDemooninPoloku(demooni);
-            demooni.remove()
-        }, 1000);
     }
 }
 
@@ -119,9 +132,9 @@ function poistaDemooninPoloku(demooni) {
 function demooninIndeksi(demooni) {
     var demoonit = document.getElementsByClassName("demooni");
     for (var i = 0; i < demoonit.length; i++) {
-      if (demoonit[i] === demooni) {
-        return i;
-      }
+        if (demoonit[i] === demooni) {
+            return i;
+        }
     }
 }
 
@@ -129,7 +142,10 @@ function demooninIndeksi(demooni) {
 function tapaKaikki() {
     var demoonit = document.getElementsByClassName("demooni");
     Array.from(demoonit).forEach(demooni => {
-        tapaDemooni(demooni, true);
+        // Don't kill the ones that are already dead
+        if (!demooni.classList.contains("kuaallu")){
+          tapaDemooni(demooni, true);
+        }
     });
 }
 
