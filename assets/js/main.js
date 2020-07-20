@@ -233,6 +233,7 @@ function uhmaaApiinaJumalaa() {
 
             setTimeout(function() {
                 apiinaJumala.remove();
+                clearInterval(uhmaLuuppi);
             }, 6666);
         }
     }
