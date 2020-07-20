@@ -229,6 +229,9 @@ function uhmaaApiinaJumalaa() {
 
                 apiinaJumala.style.left = window.innerWidth / 2 + x;
                 apiinaJumala.style.top = window.innerHeight / 2 + y;
+
+                // Tappaako apiinajumaala jonkun demoonin?
+                if (Math.floor(Math.random() * 7) > 4) tapaJoku();
             }, 100);
 
             setTimeout(function() {
@@ -238,6 +241,15 @@ function uhmaaApiinaJumalaa() {
         }
     }
 }
+
+
+function tapaJoku() {
+    let demoonit = document.getElementsByClassName("demooni");
+    var satunnainenIndeeksi =  Math.floor(Math.random() * (demoonit.length + 1));
+
+    tapaDemooni(demoonit[satunnainenIndeeksi]);
+}
+
 
 // Aloota
 aluustaKaikki();
