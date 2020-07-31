@@ -35,6 +35,9 @@ var teemat = [{
 
 
 function aluustaKaikki() {
+    snd1 = new Audio("assets/sound/laugh-1.wav");
+    snd2 = new Audio("assets/sound/laugh-2.wav");
+
     pakeetti.style.top = window.innerHeight / 2;
     pakeetti.style.left = window.innerWidth / 2;
     lataaKuvaat();
@@ -166,6 +169,12 @@ function liikutaPakeettia() {
     pakeetti.style.left = poloku[poloku.length - 1][0];
     pakeetti.style.top = poloku[poloku.length - 1][1];
 
+    if (Math.round(Math.random()) % 2 == 0) {
+        snd1.play();
+    } else {
+        snd2.play();
+    }
+    
     if (teemat[teema].jahtaa) {
         var demoonit = document.getElementsByClassName("demooni");
         for (var i = 0; i < demoonit.length; i++) {
