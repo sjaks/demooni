@@ -1,4 +1,6 @@
-var net = document.getElementById("pakeetti-poloku");
+/* https://github.com/sjaks/demooni */
+
+var verkkoaluue = document.getElementById("pakeetti-poloku");
 var pakeetti = document.getElementById("pakeetti");
 var poloku = [];
 var luuppi;
@@ -6,6 +8,7 @@ var pystyMarginaali = 200;
 var vaakaMarginaali = 100;
 
 
+// Määrittele teemaobjeektit deemooneille ja muille samankaltaisille
 var teema = 0;
 var teemat = [{
         nimi: "demooni",
@@ -34,9 +37,10 @@ var teemat = [{
 ];
 
 
+// Aluusta simulaatio lataamalla aanitteet ja luomalla ensimmäinen pakeetti
 function aluustaKaikki() {
-    snd1 = new Audio("assets/sound/laugh-1.wav");
-    snd2 = new Audio("assets/sound/laugh-2.wav");
+    aaniteYkkonen = new Audio("assets/sound/laugh-1.wav");
+    aaniteKakkonen = new Audio("assets/sound/laugh-2.wav");
 
     pakeetti.style.top = window.innerHeight / 2;
     pakeetti.style.left = window.innerWidth / 2;
@@ -45,6 +49,7 @@ function aluustaKaikki() {
 }
 
 
+// Luuppaile ja luo demooneita ja sen sellaista
 function alootaLuuppi(i) {
     luuppi = setInterval(function() {
         siivooKuolleet();
@@ -60,6 +65,7 @@ function alootaLuuppi(i) {
 }
 
 
+// Siivoile demooneiden ja muiden kuolleiden jäänteet listalta
 function siivooKuolleet() {
      var demoonit = document.getElementsByClassName("demooni");
      var i = 0;
@@ -75,18 +81,20 @@ function siivooKuolleet() {
 }
 
 
+// Aseeta intervaalli, jolla demooneite tulee ja pekeetti lentää
 function aseetaNopeeus() {
-    var newInterval = parseInt(document.getElementById("nopeeus").value);
-    if (newInterval == NaN) {
-        newInterval = 10;
+    var uusiIntervalli = parseInt(document.getElementById("nopeeus").value);
+    if (uusiIntervalli == NaN) {
+        uusiIntervalli = 10;
     }
 
-    pakeetti.style.transition = "top " + newInterval / 1000 + "s, left " + newInterval / 1000 + "s";
+    pakeetti.style.transition = "top " + uusiIntervalli / 1000 + "s, left " + uusiIntervalli / 1000 + "s";
     clearInterval(luuppi);
-    alootaLuuppi(newInterval);
+    alootaLuuppi(uusiIntervalli);
 }
 
 
+// Keksi pari satunnaista lukua
 function haeSatuunnaisetKoordinaatit() {
     var y = pystyMarginaali / 2 + Math.floor(Math.random() * Math.floor(window.innerHeight - pystyMarginaali));
     var x = vaakaMarginaali / 2 + Math.floor(Math.random() * Math.floor(window.innerWidth - vaakaMarginaali));
@@ -95,11 +103,13 @@ function haeSatuunnaisetKoordinaatit() {
 }
 
 
+// Päivitä hymiöt
 function lataaKuvaat() {
     twemoji.parse(document.body);
 }
 
 
+// Luo uusi demooni satunnaiseen paikkaan ja lisää se listaalle
 function luoUusiDemooni(i) {
     var uusiDemooni = document.createElement("span");
     var uusiSijaainti = haeSatuunnaisetKoordinaatit();
@@ -110,7 +120,7 @@ function luoUusiDemooni(i) {
     uusiDemooni.style.top = uusiSijaainti[1];
     uusiDemooni.setAttribute('onclick', "tapaDemooni(this)");
 
-    net.appendChild(uusiDemooni);
+    verkkoaluue.appendChild(uusiDemooni);
 
     setTimeout(function() {
         heilutaVaseentaEtuuRaajaa(uusiDemooni);
@@ -118,6 +128,7 @@ function luoUusiDemooni(i) {
 }
 
 
+// Poista demooni kaikkialta
 function tapaDemooni(demooni, pakota = false) {
     if (teemat[teema].kuolevainen || pakota) {
         demooni.innerHTML = "&#x1F4A5;";
@@ -127,11 +138,13 @@ function tapaDemooni(demooni, pakota = false) {
 }
 
 
+// Ota demooni pois listoilta
 function poistaDemooninPoloku(demooni) {
     poloku.splice(demooninIndeksi(demooni), 1);
 }
 
 
+// Testaile millä indeeksillä demooni on listalla
 function demooninIndeksi(demooni) {
     var demoonit = document.getElementsByClassName("demooni");
     for (var i = 0; i < demoonit.length; i++) {
@@ -142,6 +155,7 @@ function demooninIndeksi(demooni) {
 }
 
 
+// Tapa kaikki
 function tapaKaikki() {
     var demoonit = document.getElementsByClassName("demooni");
     Array.from(demoonit).forEach(demooni => {
@@ -153,6 +167,7 @@ function tapaKaikki() {
 }
 
 
+// Heiluttele demooneita ruudulla, jotta ne näyttäväy leijuvan
 function ravistaDemooneita() {
     var demoonit = document.getElementsByClassName("demooni");
     for (var i = 0; i < demoonit.length - 1; i++) {
@@ -165,14 +180,15 @@ function ravistaDemooneita() {
 }
 
 
+// Laita pakeetti lentämään demoonilta toiselle
 function liikutaPakeettia() {
     pakeetti.style.left = poloku[poloku.length - 1][0];
     pakeetti.style.top = poloku[poloku.length - 1][1];
 
     if (Math.round(Math.random()) % 2 == 0) {
-        snd1.play();
+        aaniteYkkonen.play();
     } else {
-        snd2.play();
+        aaniteKakkonen.play();
     }
     
     if (teemat[teema].jahtaa) {
@@ -194,6 +210,7 @@ function liikutaPakeettia() {
 }
 
 
+// Ota teema käyttöön
 function vaihaIkoonit() {
     var demoonit = document.getElementsByClassName("demooni");
 
@@ -219,6 +236,7 @@ function heilutaVaseentaEtuuRaajaa(kohdeDemooni) {
 }
 
 
+// Apiinajumala tulee tappamaan kaikki ja suojelee apiinoita
 function uhmaaApiinaJumalaa() {
     if (document.getElementsByClassName("apinaaJumala").length < 1){
         let demoonit = document.getElementsByClassName("demooni");
@@ -229,7 +247,7 @@ function uhmaaApiinaJumalaa() {
             apiinaJumala.className = "apinaaJumala";
             apiinaJumala.src = "assets/ApiinaJumala.png";
 
-            net.appendChild(apiinaJumala);
+            verkkoaluue.appendChild(apiinaJumala);
             tapaKaikki();
 
             var uhmaLuuppi = setInterval(function() {
@@ -252,6 +270,7 @@ function uhmaaApiinaJumalaa() {
 }
 
 
+// Tapa joku
 function tapaJoku() {
     let demoonit = document.getElementsByClassName("demooni");
     var satunnainenIndeeksi =  Math.floor(Math.random() * (demoonit.length + 1));
