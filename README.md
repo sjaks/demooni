@@ -17,7 +17,7 @@ https://github.com/sjaks/demooni.git
 ## Features
 
 ### Controls
-![](https://twemoji.maxcdn.com/v/13.0.0/72x72/1F4E6.png)  ![](https://twemoji.maxcdn.com/v/13.0.0/72x72/1f503.png)
+![](https://twemoji.maxcdn.com/v/13.0.0/72x72/1f4e6.png)  ![](https://twemoji.maxcdn.com/v/13.0.0/72x72/1f503.png)
 
 The UI consists of two buttons and a number field. You can input the desired packet interval into the field. The program then simulates packet flow
 with that value as the latency. The red SOS button can be used to terminate all the routing daemons. Watch out! It also makes the dogs and monkeys explode,
