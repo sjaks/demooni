@@ -199,7 +199,7 @@ function liikutaPakeettia() {
     pakeetti.style.left = poloku[poloku.length - 1][0];
     pakeetti.style.top = poloku[poloku.length - 1][1];
 
-    if (volyymit) {
+    if (volyymit && teema == 0) {
         if (Math.round(Math.random()) % 2 == 0) {
             aaniteYkkonen.play();
         } else {
