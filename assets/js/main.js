@@ -6,6 +6,7 @@ var poloku = [];
 var luuppi;
 var pystyMarginaali = 200;
 var vaakaMarginaali = 100;
+var volyymit = false;
 
 
 // Määrittele teemaobjeektit deemooneille ja muille samankaltaisille
@@ -62,6 +63,19 @@ function alootaLuuppi(i) {
         lataaKuvaat();
         twemoji.parse(document.body);
     }, i);
+}
+
+
+// Toglee demoonien sun muiden äänet
+function oleeppaHiljoo() {
+    if (volyymit) {
+        volyymit = false;
+        document.getElementById("volyymiNappula").innerHTML = "&#x1F508;";
+    } else {
+        volyymit = true;
+        document.getElementById("volyymiNappula").innerHTML = "&#x1F50A;";
+    }
+    lataaKuvaat();
 }
 
 
@@ -185,10 +199,12 @@ function liikutaPakeettia() {
     pakeetti.style.left = poloku[poloku.length - 1][0];
     pakeetti.style.top = poloku[poloku.length - 1][1];
 
-    if (Math.round(Math.random()) % 2 == 0) {
-        aaniteYkkonen.play();
-    } else {
-        aaniteKakkonen.play();
+    if (volyymit) {
+        if (Math.round(Math.random()) % 2 == 0) {
+            aaniteYkkonen.play();
+        } else {
+            aaniteKakkonen.play();
+        }
     }
     
     if (teemat[teema].jahtaa) {

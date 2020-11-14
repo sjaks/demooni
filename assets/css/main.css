@@ -71,6 +71,16 @@ html, body {
     width: 60px;
 }
 
+#volyymiNappula {
+    position: absolute;
+    left: 15px;
+    bottom: 30px;
+    height: 60px;
+    width: 60px;
+    z-index: 3;
+    cursor: url('https://twemoji.maxcdn.com/36x36/261d.png'), auto;
+}
+
 .demooni {
     position: absolute;
     font-size: 35px;
